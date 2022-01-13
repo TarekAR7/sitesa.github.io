@@ -1,0 +1,588 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Mitr:wght@200;300;400;500;600;700&display=swap');
+:root {    /*root est un mot clé*/
+    --color1: #ffffff;
+    --color2: #ffbd00;
+    --color3: #ff60ce;
+    --color4: #9b9eac;
+    --color5: #0b0016;
+    --bordercolor: #ffbd00;
+    --backgroundColor1: #0b0016;/*blue*/
+    --backgroundColor2: #0a0a0a;   
+    --backgroundColor3: #ffffff;
+    --backgroundColor4: #ff60ce;
+    --font1:  'Barlow', sans-serif;      /* sans-serif est le backup */
+    --font2: 'Mitr', sans-serif;
+}
+
+
+* {
+    box-sizing: border-box;
+    color: var(--color4);
+  
+}
+body{
+    margin: 0 ;
+    width: 100%;
+    background-color: var(--backgroundColor1); 
+    font-family: var(--font1);
+}
+ul {
+    padding: 0;       /* we always have to put ul's padding at 0 */
+}
+a,h1,h2,h3,h4,h5,h6{
+    color: var(--color1);
+}
+img{
+    width: 90px;
+}
+
+nav{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000000;   /* so that the nav barre doesn't comme under the gradient. un élément couvrira un autre élément si sa valeur de  z-index est supérieure à celle du deuxième élément. */
+    
+}
+.container{
+    width: 100%;
+    padding: 7em 4.5% 0 4.5%;            /* 0 for top and buttom, 10 for left and right */
+    display: flex; 
+    flex-direction: column;                   
+                 
+}
+nav > .container{
+    padding: 0em 4.5% 0em 4.5%; 
+    align-items: center;         /* pour que tous les éléments de la nav barre soient alignés */
+flex-direction: row;
+}
+.nav-list{
+    margin-left: auto;          /* to push the list to the right so the left space is calculated automatically */
+    display: flex;                    /* c'est ce qui */
+    flex-direction: row;              /* les mettent l'une à coté de l'autre */
+    align-items:center ;
+}
+.nav-list li{
+    list-style: none;        /* pour enlever les énumérations */
+    position: relative;           /*so that when we fix the top and left in the .nav-menu it'll be relative to the parent  */  
+    padding: 0.8em;              /* un espace entre les elements de la liste */
+    
+}
+a{
+    text-decoration: none;
+    transition: 0.5s;
+}
+nav a{
+    text-decoration: none;       /* c'est pour enlver les lignes sous les liens */
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.nav-menu{
+    transition: visibility 0.5s;
+    position: absolute;             /* to push it to another layer so that it doesn't effect the others */
+    top: 8em; 
+    left : 0;
+    background-color: var(--backgroundColor3);
+    color: var(--color2);
+    visibility: hidden;
+}
+.nav-list > li:hover > a{
+    color: var(--color3);
+}
+.nav-menu > li:hover > a{
+    color: var(--color3);
+}
+
+.details:hover .nav-menu{
+    animation: barre 0.9s forwards 0.4s;
+}
+ @keyframes barre {
+    from{visibility: hidden; ; top: 5em;}
+    to{visibility: visible; top: 3.9em ;}
+ }
+.nav-menu a {
+    color: var(--backgroundColor1);
+}
+@keyframes glisser{
+    from{transform: translateY(-200px)}
+    to{transform: translateY(0px)}
+}
+
+.fixed{
+    animation: glisser 1s ;
+    position: fixed;
+    background-color: var(--backgroundColor2);
+    opacity: 80%;
+}
+
+.nav-list > li:first-child a{
+    color: var(--color2);
+}
+
+/* btn styles */
+
+.btn, .btn1{
+    border: 1px solid var(--bordercolor);
+    display: flex;
+    padding: 0.8em 1.5em;
+    margin: 0em 0em;
+    align-items: center;
+    background-color: var(--bordercolor);
+    color: var(--backgroundColor1);
+    justify-content: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1em;
+    font-weight: 650;
+    transition: 1s;
+}
+.btn:hover, .btn1{
+    background-color:transparent ;
+    color: var(--color2);
+}
+.btn1:hover{
+    background-color: var(--bordercolor);
+    color: var(--backgroundColor1);
+} 
+.btn .fa{           /* la flèche dans le bouton */
+    height: 1.2em;
+    margin-left: 0.2em;
+    color: var(--color5);
+}
+.btn:hover .btn .fa{
+    color: var(--color2);
+}
+/* btn style */
+
+header{
+    padding-top: 0.3em;
+    height: 100vh;
+    background-image: url(../images/photo-1590402494682-cd3fb53b1f70.jpg);
+    background-size: cover;
+    position: relative;   /* so thet its absolute children follow it  */
+}
+header::before{
+    content: "";       /* this is always necessary so that the before works */
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top : 0em;        /* so that it begins from the top of the page */
+    background-color: rgba(11, 0, 22, 0.5) ;
+    background: linear-gradient(180deg,  rgba(11,0,22,0.4) 0%, rgba(11,0,22,0.7) 65%, rgba(11,0,22,1) 100%); /*we can replace 180deg by "to bottom" */
+}
+
+header > .container{
+    flex-direction: column;
+    /* margin-top: 0.7em ;
+    margin-bottom: 0.4em; */
+}
+header h1{
+    font-family: var(--font2);
+    font-size: 5.2em;
+    width: 8.2ch;        /* the unit ch is the width of the caracter 'o', we limit the width to jump the line */
+    line-height: 1em;    /* l'interligne */
+    text-transform: uppercase;
+    margin: 0.9em 0 0.4em 0;     /* to push the title a little bit to the bottom */
+    z-index: 100000;
+}
+header h1 span{
+    color: var(--color2);
+    
+}
+header .info{
+    z-index: 100000;
+    margin-left: auto;
+    display: flex; 
+    flex-direction: column;
+    /* margin-top: auto; */
+    align-items: flex-end;  /* comme les elts sont flexibles on utilise align-items */
+    text-transform: uppercase;
+    line-height: 0.3em;
+   
+}
+.info .btn1{
+    margin-top: 1.2em;
+    padding: 1.3em;
+}
+header h3{
+    font-family: var(--font2);
+    color: var(--color3);
+    font-size: 2.1em;
+    
+    margin-top: 0;
+    
+}
+.info a:first-of-type{
+    font-size: 1.2em;
+}
+.half{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-items: center;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}    
+h2{
+    color: var(--color1);
+    font-family: var(--font2);
+    font-size: 2.6em;
+    width: 7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.1em;
+}
+.counterp{
+    width: 100%;
+}
+.counter{
+    width: 33%;
+}
+.number_counter{
+    color: var(--color3);
+    font-size: 3em;
+    margin: 0;
+}
+.number_counter span{
+    color: var(--color3);
+}
+.counter p{
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.half > p{
+    font-size: 1.2em;
+}
+.top_div{
+    display: flex;
+    justify-content: space-between;
+   
+}
+.top_div h2{
+    margin: 0;
+}
+.buttom_div, .buttom_div_1 {
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    margin-top: 3em;
+    justify-content: space-between;
+    align-items: center;
+}
+.buttom_div img{
+    width: 100%;
+  
+}
+ @keyframes show{
+    from{bottom: -3em}
+    to{bottom: -6em}
+} 
+.speaker_img{
+    margin:0;
+    padding: 0;
+   position: relative;
+     overflow-y: hidden;
+     width: 100%;
+}
+.speaker_img img:hover{
+    transform: scale(1.1);
+}
+.slick-prev, .slick-next{
+    background-color: transparent;
+    color: transparent;
+    border: none;
+    position: relative;
+    width: 0em;
+    height: 0em;
+}
+.slick-prev::before{
+    position: absolute; 
+    width: 100%;
+    height: 100%;
+    color: var(--color4);
+    top: 0em;
+    left: 0em; 
+    content: "<";
+}
+.slick-next::before{
+    position: absolute; 
+    width: 100%;
+    height: 100%;
+    color: var(--color4);
+    top: 0;
+    left: 0em;
+    content: ">";
+}
+
+.speaker_img img{
+   width: 100%;
+   transition: 0.6s ease-in-out ; 
+}
+.speaker{
+    margin-top: 2.3em;
+    width: 24%;
+    margin-left: 0.4em;
+    margin-right: 0.4em;
+}
+
+.social_media{
+    position:absolute;
+    bottom: -3em;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 2em 0 2em;
+}
+h5{
+    text-transform: uppercase;
+    font-size: 1.5em;
+    color: var(--color2);
+    margin:0;
+}
+.speaker p{
+    color: var(--color1);
+    font-size: 1.2em;
+    margin: 0;
+}
+.social_media .icons{
+    width: 2.3em;
+    height: 2.3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;  /*to make the squares circles */
+    background-color: var(--backgroundColor4);
+    
+}
+.social_media .icons:hover{
+    background-color: var(--bordercolor);
+}
+.social_media .icons svg{
+    width:1em;
+    height:1em;
+}
+.speaker_img:hover .social_media .icons{
+     transform: translateY(-5em); 
+}
+ .social_media .icons:nth-child(1){
+    transition: transform 0.3s linear 0.1s;
+}
+ .social_media .icons:nth-child(2){
+    transition: transform  0.3s linear 0.2s;
+}
+ .social_media .icons:nth-child(3){
+    transition: transform  0.3s linear 0.3s;
+}
+.details{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items: flex-start;
+}
+.div-right{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    
+}
+.div-left img{
+    width:89%;
+
+}
+.details p{
+    font-size: 1.2em;
+    margin: 0.5em;
+}
+.details h2{
+    width: 8em;
+    margin: 0.3em 0em;
+    line-height: 1.2em;
+}
+.details h2 span{
+    color: var(--color2);
+}
+.schedule {
+    background-color: var(--backgroundColor2);
+    padding: 2em;
+}
+.schedule_nav{
+    display: flex;
+    justify-content: center;
+    border-bottom: 00.7px solid var(--color4);
+}
+.schedule_nav a{
+    margin:0 1.2em;
+    padding-bottom: 1em;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-bottom: 0.2em solid transparent;
+}
+.schedule_nav a:hover,
+.schedule_nav a.active{
+    border-bottom: 0.2em solid var(--color2);
+    color: var(--color2);
+}
+.hidden{
+    display: none;
+}
+.time_div{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.7px dashed var(--color4) ;
+    padding: 1.5em;
+}
+.time_div h4{
+    font-size: 1.5em;
+}
+.time_div li{
+   list-style-type: "- ";
+   list-style-position: inside;   /* pour que le "-" se compte avec le texte */
+   line-height: 1.7em;
+}
+
+.location{
+    padding-top: 8em;
+    width: 100%;
+    position: relative;
+}
+.location iframe{
+    width: 100%;
+    opacity: 0.3;
+    transition: 1s;
+}
+/* .location iframe::before{
+    content: "";       
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top : 0em;        
+    background-color: rgba(11, 0, 22, 0.7) ;
+}
+.location iframe:hover {
+    background-color: transparent;
+} */
+
+.location iframe:hover{
+    opacity: 1;
+
+}
+.sponsors{
+    padding-top: 6em;
+}
+.spons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    padding:3em 2em;
+    background-color: var(--backgroundColor2);
+}
+.sponsors img{
+    width: 100%;
+}
+.sponsors li{
+    list-style: none;
+    padding: 1em;
+}
+.sponsors ul{
+    width: 100%;
+    margin-top: 2.5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.contact{
+    display: flex;
+    flex-direction: row;
+}
+.division{
+    display: flex;
+    flex-direction: column;
+    width: 33.3333%;
+    padding: 0 0.6em 0 0.6em;
+}
+.division p{
+    width: 90%;
+}
+h4{
+    font-size: 1.7em;
+    font-weight: 550;
+    margin: 0 0 0.7em 0;
+}
+.contact a{
+    font-size: 1.1em;
+    font-weight: 600;
+    line-height: 1.6em;
+    text-decoration: underline;
+
+}
+.contact a:last-of-type{
+    color: var(--color2);
+    font-size: 1.4em
+}
+.contact .clair{
+    color: var(--color4);
+}
+.subscribe p {
+    margin: 0.9em 0; 
+}
+.subscribe input{
+    width: 100%;
+}
+.subscribe .btn1{
+    width: 100%;
+}
+.subscribe .btn{
+    width: 100%;
+    margin-top: 0.4em;
+}
+.subscribe form p{
+    margin-top: 0.3em;
+}
+.subscribe .btn1:hover {
+    background-color:transparent ;
+    color: var(--color2);
+}
+.copyright {
+    padding-top: 2.8em;
+}
+.copyright .para{
+    display: flex;
+    justify-content: center; 
+     font-size: 1.3em;
+}
+.copyright p{
+    margin-top: 0.9em ;
+    margin-bottom: 0.9em;
+}
+.copyright a{
+    color: indigo;
+}
+.copyright hr{
+    width: 100%;
+    color: var(--color4);
+}
+.back_to_top{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: 50%;
+    background-color: var(--color2);
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 100000000;
+    visibility: hidden;
+}
+.visi{
+   visibility: visible;
+}
